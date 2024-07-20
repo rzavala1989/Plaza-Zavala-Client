@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import Link from 'next/link';
+import DateInput from "@/components/custom-components/DateInput";
 
 export default function HeroSection() {
     const {
@@ -32,7 +33,7 @@ export default function HeroSection() {
                 <h1 className="text-5xl font-serif font-bold text-white">Welcome to My Hotel</h1>
                 <p className="text-xl text-white mt-4">Experience luxury and comfort with us</p>
                 <div
-                    className="relative z-2 flex flex-col items-center justify-center w-full p-8 bg-white shadow-lg rounded-lg mt-8">
+                    className="relative z-2 flex flex-row items-center justify-center w-full p-8 bg-white shadow-lg rounded-lg mt-8">
                     <h2 className="text-2xl font-semibold mb-4">Book Your Stay</h2>
 
                     <div className="mb-4 w-full">
@@ -40,7 +41,9 @@ export default function HeroSection() {
                         <DatePicker
                             selected={checkInDate}
                             onChange={(date) => date && setCheckInDate(date)}
-                            className="w-full px-3 py-2 border rounded"
+                            customInput={<DateInput value={checkInDate ? checkInDate.toDateString() : ''}
+                                                    onClick={() => {
+                                                    }} isCheckin={true}/>} // Use the DateInput component
                         />
 
                     </div>
@@ -50,7 +53,9 @@ export default function HeroSection() {
                         <DatePicker
                             selected={checkOutDate}
                             onChange={(date) => date && setCheckOutDate(date)}
-                            className="w-full px-3 py-2 border rounded"
+                            customInput={<DateInput value={checkOutDate ? checkOutDate.toDateString() : ''}
+                                                    onClick={() => {
+                                                    }} isCheckin={false}/>} // Use the DateInput component
                         />
                     </div>
 
@@ -60,7 +65,7 @@ export default function HeroSection() {
                             options={hotels}
                             value={selectedHotel}
                             onChange={(hotel) => setSelectedHotel(hotel as { label: string; value: number })}
-                            className="w-full"
+                            className="w-full text-black"
                         />
                     </div>
 
@@ -70,7 +75,7 @@ export default function HeroSection() {
                             options={roomTypes}
                             value={selectedRoomType}
                             onChange={(roomType) => setSelectedRoomType(roomType as { label: string; value: number })}
-                            className="w-full"
+                            className="w-full text-black"
                         />
                     </div>
 
